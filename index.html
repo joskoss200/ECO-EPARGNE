@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoÉpargne - Banque en Poche & Passerelle Crypto</title>
+    <title>EcoEpargne - Banque en Poche & Passerelle Crypto</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -15,144 +15,861 @@
 
     <div id="app" class="max-w-md mx-auto min-h-screen bg-white shadow-2xl flex flex-col justify-between relative overflow-hidden">
 
-        <!-- 1. AUTHENTIFICATION -->
+        <!-- ================= 1. AUTHENTIFICATION ================= -->
         <div id="screen-auth" class="p-6 flex flex-col justify-center min-h-screen">
             <div class="text-center mb-6">
-                <!-- LOGO INTEGRÉ -->
+                <!-- LOGO INTÉGRÉ -->
                 <div class="w-32 h-32 mx-auto mb-3 flex items-center justify-center">
                     <img src="URL_DE_TON_LOGO_ICI" alt="EcoEpargne Logo" class="w-full h-full object-contain">
                 </div>
-                <h1 class="text-2xl font-black text-slate-900 tracking-tight">Eco<span class="text-blue-600">Épargne</span></h1>
+                <h1 class="text-2xl font-black text-slate-900 tracking-tight">Eco<span class="text-blue-600">Epargne</span></h1>
                 <p class="text-xs text-slate-500 mt-1">Votre banque en poche & Passerelle Crypto-XOF</p>
             </div>
 
             <!-- Onglets -->
             <div class="flex bg-slate-100 p-1 rounded-2xl mb-6 shadow-inner">
-                <button onclick="switchAuthTab('login')" id="tab-login" class="flex-1 py-2.5 text-xs font-bold rounded-xl bg-white shadow-sm text-blue-600 transition-all">Connexion</button>
-                <button onclick="switchAuthTab('register')" id="tab-register" class="flex-1 py-2.5 text-xs font-bold rounded-xl text-slate-400 transition-all">Inscription</button>
+                <button onclick="switchAuthTab('login')" id="tab-login" class="flex-1 py-2.5 text-xs font-bold rounded-xl bg-white shadow-sm transition text-slate-800">Connexion</button>
+                <button onclick="switchAuthTab('register')" id="tab-register" class="flex-1 py-2.5 text-xs font-bold text-slate-400 transition">Créer un compte</button>
             </div>
 
             <!-- FORMULAIRE CONNEXION -->
             <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1"><i class="fa-solid fa-phone mr-1 text-blue-600"></i> Téléphone</label>
-                    <input type="text" id="login-phone" required placeholder="Ex: 0700000000" class="w-full px-4 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-blue-600 transition-all">
+                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1"><i class="fa-solid fa-phone mr-1 text-blue-600"></i>Téléphone</label>
+                    <input type="text" id="login-phone" required placeholder="Ex: 0700000000" class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:outline-none focus:border-blue-600 text-sm font-medium">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1"><i class="fa-solid fa-lock mr-1 text-blue-600"></i> Code PIN (4 chiffres)</label>
-                    <input type="password" id="login-pin" maxlength="4" required placeholder="••••" class="w-full px-4 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-sm tracking-widest text-center focus:outline-none focus:border-blue-600 transition-all">
+                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1"><i class="fa-solid fa-lock mr-1 text-blue-600"></i>Code PIN (4 chiffres)</label>
+                    <input type="password" id="login-pin" maxlength="4" required placeholder="••••" class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:outline-none focus:border-blue-600 tracking-widest text-center text-xl font-bold">
                 </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-bold shadow-lg shadow-blue-600/30 transition-all active:scale-[0.98]">
-                    Se connecter
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-bold shadow-lg shadow-blue-200 transition flex items-center justify-center space-x-2">
+                    <span>Se connecter</span>
+                    <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </form>
 
             <!-- FORMULAIRE INSCRIPTION -->
-            <form id="form-register" onsubmit="handleRegister(event)" class="space-y-4 hidden">
-                <div>
-                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1"><i class="fa-solid fa-user mr-1 text-blue-600"></i> Nom et Prénom</label>
-                    <input type="text" id="reg-name" required placeholder="Ex: Jean Kouassi" class="w-full px-4 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-blue-600 transition-all">
+            <form id="form-register" onsubmit="handleRegister(event)" class="space-y-3 hidden">
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Prénom</label>
+                        <input type="text" id="reg-firstname" required placeholder="Jean" class="w-full px-3 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Nom</label>
+                        <input type="text" id="reg-lastname" required placeholder="Paul" class="w-full px-3 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600">
+                    </div>
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1"><i class="fa-solid fa-phone mr-1 text-blue-600"></i> Téléphone</label>
-                    <input type="text" id="reg-phone" required placeholder="Ex: 0700000000" class="w-full px-4 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:border-blue-600 transition-all">
+                    <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Téléphone</label>
+                    <input type="text" id="reg-phone" required placeholder="07070707" class="w-full px-3 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold uppercase text-slate-400 mb-1"><i class="fa-solid fa-lock mr-1 text-blue-600"></i> Créer un Code PIN (4 chiffres)</label>
-                    <input type="password" id="reg-pin" maxlength="4" required placeholder="••••" class="w-full px-4 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-sm tracking-widest text-center focus:outline-none focus:border-blue-600 transition-all">
+                    <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Email</label>
+                    <input type="email" id="reg-email" required placeholder="exemple@gmail.com" class="w-full px-3 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600">
                 </div>
-                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white py-4 rounded-2xl font-bold shadow-lg transition-all active:scale-[0.98]">
-                    Créer mon compte
-                </button>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Agence</label>
+                    <input type="text" id="reg-agency" required placeholder="Abidjan Plateau" class="w-full px-3 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Code PIN (4 chiffres)</label>
+                    <input type="password" id="reg-pin" maxlength="4" required placeholder="••••" class="w-full px-3 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 tracking-widest text-center font-bold">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-2xl font-bold shadow-lg shadow-blue-200 transition mt-2">Valider mon inscription</button>
             </form>
         </div>
 
-        <!-- ÉCRAN DASHBOARD (Masqué par défaut) -->
-        <div id="screen-dashboard" class="hidden flex flex-col h-screen">
-            <!-- Header -->
-            <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
-                <div>
-                    <p class="text-[10px] text-slate-400 uppercase tracking-wider">Bienvenue,</p>
-                    <h2 id="user-display-name" class="font-bold text-sm">Utilisateur</h2>
+
+        <!-- ================= 2. DASHBOARD PRINCIPAL ================= -->
+        <div id="screen-dashboard" class="hidden flex flex-col min-h-screen justify-between bg-slate-50 pb-20">
+            
+            <!-- HEADER -->
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5 rounded-b-[35px] shadow-lg">
+                <div class="flex justify-between items-center mb-5">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative group cursor-pointer" onclick="triggerPhotoUpload()">
+                            <img id="dash-avatar" src="https://via.placeholder.com/150/2563eb/ffffff?text=Avatar" class="w-12 h-12 rounded-2xl border-2 border-blue-400 object-cover shadow-md">
+                            <div class="absolute inset-0 bg-black/40 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                                <i class="fa-solid fa-camera text-xs text-white"></i>
+                            </div>
+                        </div>
+                        <input type="file" id="photo-input" class="hidden" accept="image/*" onchange="uploadAvatar(event)">
+
+                        <div>
+                            <p class="text-[10px] text-blue-200 uppercase tracking-widest font-bold">Bienvenue,</p>
+                            <h2 id="dash-name" class="text-sm font-black">--</h2>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <!-- CENTRE DE NOTIFICATIONS -->
+                        <button onclick="toggleNotifications()" class="relative w-10 h-10 bg-blue-700/60 hover:bg-blue-700 rounded-2xl flex items-center justify-center text-blue-200 hover:text-white transition shadow-inner">
+                            <i class="fa-solid fa-bell text-sm"></i>
+                            <span id="notif-badge" class="absolute top-2 right-2 w-2 h-2 bg-pink-500 rounded-full"></span>
+                        </button>
+                        <!-- DECONNEXION -->
+                        <button onclick="logout()" class="w-10 h-10 bg-blue-700/60 hover:bg-blue-700 rounded-2xl flex items-center justify-center text-blue-200 hover:text-white transition shadow-inner">
+                            <i class="fa-solid fa-power-off text-sm"></i>
+                        </button>
+                    </div>
                 </div>
-                <button onclick="logout()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-red-400 transition-all">
-                    <i class="fa-solid fa-power-off"></i>
+
+                <!-- CARTES SOLDES -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-blue-700/40 backdrop-blur-md p-4 rounded-2xl border border-blue-400/30">
+                        <div class="flex items-center space-x-2 text-blue-200 text-[10px] uppercase font-bold mb-1">
+                            <i class="fa-solid fa-wallet text-xs"></i>
+                            <span>Disponible</span>
+                        </div>
+                        <h3 id="dash-available" class="text-lg font-black tracking-tight">0 XOF</h3>
+                    </div>
+                    <div class="bg-blue-700/40 backdrop-blur-md p-4 rounded-2xl border border-blue-400/30">
+                        <div class="flex items-center space-x-2 text-blue-200 text-[10px] uppercase font-bold mb-1">
+                            <i class="fa-solid fa-vault text-xs"></i>
+                            <span>Épargné</span>
+                        </div>
+                        <h3 id="dash-saved" class="text-lg font-black tracking-tight">0 XOF</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENU DES VUES -->
+            <div class="p-5 flex-1 space-y-4 overflow-y-auto">
+
+                <!-- VUE ACCUEIL -->
+                <div id="view-home" class="space-y-4">
+                    <!-- GRAPHIQUE FINANCIER -->
+                    <div class="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-extrabold text-xs text-slate-700 uppercase tracking-wider flex items-center space-x-2">
+                                <i class="fa-solid fa-chart-pie text-blue-600"></i>
+                                <span>Évolution Globale</span>
+                            </h4>
+                            <span class="text-[10px] bg-blue-50 text-blue-700 px-2.5 py-1 rounded-xl font-bold">Actif</span>
+                        </div>
+                        <div class="h-36">
+                            <canvas id="financeChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Activité récente & Raccourcis -->
+                    <div class="flex justify-between items-center pt-1">
+                        <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider flex items-center space-x-1.5">
+                            <i class="fa-solid fa-receipt text-blue-600"></i>
+                            <span>Dernières Activités</span>
+                        </h4>
+                        <button onclick="switchView('history')" class="text-xs text-blue-600 font-bold hover:underline">Voir tout</button>
+                    </div>
+                    <div id="home-recent-activity" class="space-y-2"></div>
+                </div>
+
+                <!-- VUE ÉCONOMIES (COFFRES) -->
+                <div id="view-savings" class="space-y-4 hidden">
+                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div>
+                            <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-2">
+                                <i class="fa-solid fa-piggy-bank text-blue-600 text-base"></i>
+                                <span>Mes Économies & Coffres</span>
+                            </h3>
+                            <p class="text-[11px] text-slate-400 mt-0.5">Déblocage automatique la veille (J-1)</p>
+                        </div>
+                        <button onclick="openModalVault()" class="bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-xl font-bold text-xs shadow-md shadow-blue-200 flex items-center justify-center">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <div id="vaults-full-list" class="space-y-3"></div>
+                </div>
+
+                <!-- VUE HISTORIQUE DES TRANSACTIONS -->
+                <div id="view-history" class="space-y-3 hidden">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-clock-rotate-left text-blue-600"></i>
+                            <span>Historique Complet</span>
+                        </h3>
+                        <span id="tx-count" class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-lg font-bold">0 opérations</span>
+                    </div>
+                    <div id="full-transactions-list" class="space-y-2"></div>
+                </div>
+
+                <!-- VUE CRYPTO & PASSERELLE DE PAIEMENT -->
+                <div id="view-crypto" class="space-y-4 hidden">
+                    <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 text-white p-5 rounded-3xl shadow-lg relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl"></div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[10px] bg-blue-500/20 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-xl font-bold flex items-center space-x-1">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>Passerelle Active (API Link)</span>
+                            </span>
+                            <span class="text-xs text-slate-300 font-bold">1 USDT = 615 XOF</span>
+                        </div>
+                        <h4 class="font-extrabold text-sm mt-1">Passerelle de Change Crypto ⇄ XOF</h4>
+                        <p class="text-xs text-slate-400 mt-1">Déposez vos cryptomonnaies sur notre adresse officielle. Le système crédite instantanément votre compte en Francs CFA.</p>
+                    </div>
+
+                    <!-- Onglets Actions Crypto -->
+                    <div class="flex bg-slate-200/60 p-1 rounded-2xl shadow-inner">
+                        <button onclick="switchCryptoTab('deposit')" id="ctab-deposit" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-slate-800 transition">Déposer (Crypto ➔ XOF)</button>
+                        <button onclick="switchCryptoTab('withdraw')" id="ctab-withdraw" class="flex-1 py-2 text-xs font-bold text-slate-500 transition">Retirer (XOF ➔ Crypto)</button>
+                    </div>
+
+                    <!-- SOUS-VUE 1 : DÉPOSER CRYPTO ET RECEVOIR XOF -->
+                    <div id="crypto-sub-deposit" class="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-sm space-y-3">
+                        <h4 class="font-bold text-xs text-slate-700 uppercase flex items-center space-x-1.5">
+                            <i class="fa-solid fa-qrcode text-blue-600"></i>
+                            <span>Adresse de dépôt officielle</span>
+                        </h4>
+                        
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 mb-1">Sélectionner le réseau</label>
+                            <select id="deposit-crypto-net" onchange="updateDepositAddress()" class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none font-medium">
+                                <option value="USDT">USDT (Tether - Réseau TRC20)</option>
+                                <option value="BTC">Bitcoin (Réseau BTC Mainnet)</option>
+                                <option value="ETH">Ethereum (Réseau ERC20)</option>
+                            </select>
+                        </div>
+
+                        <!-- Affichage Adresse et QR Code -->
+                        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col items-center text-center space-y-2">
+                            <div class="w-24 h-24 bg-white p-2 rounded-xl shadow-inner border border-slate-200 flex items-center justify-center">
+                                <i class="fa-solid fa-qrcode text-5xl text-slate-800"></i>
+                            </div>
+                            <div class="w-full">
+                                <span class="text-[10px] text-slate-400 font-bold block mb-0.5">Adresse du coffre passerelle :</span>
+                                <div class="flex items-center justify-between bg-white px-3 py-2 rounded-xl border border-slate-200">
+                                    <span id="display-wallet-address" class="text-[11px] font-mono font-bold text-slate-700 truncate mr-2">TX9qK2mP8vL3wY5zB7nH1xQ4</span>
+                                    <button onclick="copyWalletAddress()" class="text-blue-600 hover:text-blue-700 text-xs font-bold bg-blue-50 px-2 py-1 rounded-lg">Copier</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form onsubmit="handleCryptoDepositSubmit(event)" class="space-y-2.5 pt-2">
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-400 mb-1">Montant crypto envoyé</label>
+                                <input type="number" step="any" id="deposit-crypto-amount" required placeholder="Ex: 50" class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none font-medium">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-400 mb-1">Hash de transaction (ID TXID)</label>
+                                <input type="text" id="deposit-tx-hash" required placeholder="Ex: 0x4f8c...3a19" class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none font-mono text-[11px]">
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold text-xs shadow-md transition">J'ai payé, valider le crédit XOF</button>
+                        </form>
+                    </div>
+
+                    <!-- SOUS-VUE 2 : RETIRER / CONVERTIR XOF EN CRYPTO -->
+                    <div id="crypto-sub-withdraw" class="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-sm space-y-3 hidden">
+                        <h4 class="font-bold text-xs text-slate-700 uppercase flex items-center space-x-1.5">
+                            <i class="fa-solid fa-paper-plane text-blue-600"></i>
+                            <span>Retrait en Cryptomonnaie</span>
+                        </h4>
+                        <form onsubmit="handleCryptoWithdrawSubmit(event)" class="space-y-2.5">
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-400 mb-1">Recevoir en</label>
+                                <select id="withdraw-crypto-type" class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none font-medium">
+                                    <option value="USDT">USDT (TRC20)</option>
+                                    <option value="BTC">Bitcoin</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-400 mb-1">Montant en XOF à débiter</label>
+                                <input type="number" id="withdraw-xof-amount" required placeholder="Ex: 30000" class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none font-medium">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-400 mb-1">Votre adresse de portefeuille externe</label>
+                                <input type="text" id="withdraw-user-address" required placeholder="Collez votre adresse de réception ici..." class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none font-mono text-[11px]">
+                            </div>
+                            <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white py-3 rounded-xl font-bold text-xs shadow-md transition">Initier le retrait crypto</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- VUE PARAMÈTRES -->
+                <div id="view-settings" class="space-y-4 hidden">
+                    <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-2">
+                        <i class="fa-solid fa-gears text-blue-600"></i>
+                        <span>Paramètres & Profil</span>
+                    </h3>
+
+                    <div class="bg-white rounded-3xl border border-slate-200/80 p-5 space-y-4 shadow-sm">
+                        <div class="flex items-center space-x-3.5 pb-4 border-b border-slate-100">
+                            <img id="settings-avatar" src="https://via.placeholder.com/150/2563eb/ffffff?text=User" class="w-14 h-14 rounded-2xl object-cover border-2 border-blue-500 shadow">
+                            <div>
+                                <h4 id="sett-fullname" class="font-black text-slate-900 text-sm">--</h4>
+                                <p id="sett-agency" class="text-xs text-blue-600 font-bold">--</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs font-medium">
+                            <div class="flex justify-between py-1.5 border-b border-slate-50">
+                                <span class="text-slate-400 flex items-center space-x-1.5"><i class="fa-solid fa-phone w-4"></i><span>Téléphone</span></span>
+                                <span id="sett-phone" class="font-bold text-slate-800">--</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-slate-50">
+                                <span class="text-slate-400 flex items-center space-x-1.5"><i class="fa-solid fa-envelope w-4"></i><span>Email</span></span>
+                                <span id="sett-email" class="font-bold text-slate-800">--</span>
+                            </div>
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 flex items-center space-x-1.5"><i class="fa-solid fa-shield-halved w-4"></i><span>KYC</span></span>
+                                <span class="text-blue-600 font-bold bg-blue-50 px-2 py-0.5 rounded-lg">Vérifié</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="logout()" class="w-full bg-red-50 hover:bg-red-100 text-red-600 py-3.5 rounded-2xl font-bold text-xs transition border border-red-200 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-power-off"></i>
+                        <span>Se déconnecter</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- ================= NAVIGATION BASSE ================= -->
+            <div class="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200/80 px-4 py-2 flex justify-between items-center text-slate-400 text-[10px] font-bold shadow-2xl z-20">
+                <button onclick="switchView('home')" id="nav-home" class="text-blue-600 flex flex-col items-center space-y-1 transition flex-1">
+                    <i class="fa-solid fa-house text-base"></i>
+                    <span>Accueil</span>
+                </button>
+                <button onclick="switchView('savings')" id="nav-savings" class="flex flex-col items-center space-y-1 hover:text-blue-600 transition flex-1">
+                    <i class="fa-solid fa-piggy-bank text-base"></i>
+                    <span>Économies</span>
+                </button>
+
+                <!-- BOUTON CENTRAL PLUS -->
+                <div class="relative -top-4 flex-1 flex justify-center">
+                    <button onclick="toggleActionMenu()" class="w-14 h-14 bg-gradient-to-tr from-blue-600 to-indigo-500 text-white rounded-full shadow-lg shadow-blue-300 flex items-center justify-center text-xl hover:scale-105 active:scale-95 transition">
+                        <i id="fab-icon" class="fa-solid fa-plus transition-transform"></i>
+                    </button>
+                </div>
+
+                <button onclick="switchView('crypto')" id="nav-crypto" class="flex flex-col items-center space-y-1 hover:text-blue-600 transition flex-1">
+                    <i class="fa-solid fa-right-left text-base"></i>
+                    <span>Crypto</span>
+                </button>
+                <button onclick="switchView('settings')" id="nav-settings" class="flex flex-col items-center space-y-1 hover:text-blue-600 transition flex-1">
+                    <i class="fa-solid fa-gear text-base"></i>
+                    <span>Paramètres</span>
                 </button>
             </div>
 
-            <!-- Solde principal -->
-            <div class="p-6 bg-gradient-to-br from-blue-600 to-blue-800 text-white m-4 rounded-3xl shadow-xl">
-                <p class="text-xs text-blue-100 uppercase font-medium">Solde Disponible</p>
-                <h1 id="user-balance" class="text-3xl font-black mt-1">0 XOF</h1>
-                <div class="flex gap-2 mt-4">
-                    <button onclick="alert('Dépôt Mobile Money')" class="flex-1 bg-white/20 hover:bg-white/30 py-2 rounded-xl text-xs font-bold transition-all"><i class="fa-solid fa-plus mr-1"></i> Dépôt</button>
-                    <button onclick="alert('Retrait Mobile Money')" class="flex-1 bg-white/20 hover:bg-white/30 py-2 rounded-xl text-xs font-bold transition-all"><i class="fa-solid fa-arrow-up mr-1"></i> Retrait</button>
+            <!-- ================= MENU FLOTTANT DU BOUTON PLUS (+) ================= -->
+            <div id="action-menu" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden z-40 flex items-end justify-center pb-24 px-4" onclick="toggleActionMenu()">
+                <div class="bg-white rounded-3xl p-4 w-full max-w-sm shadow-2xl space-y-2" onclick="event.stopPropagation()">
+                    <div class="text-center pb-2 border-b border-slate-100">
+                        <h4 class="font-black text-xs uppercase tracking-wider text-slate-700">Actions Rapides</h4>
+                    </div>
+                    <button onclick="closeActionMenu(); openModalVault()" class="w-full p-3 bg-blue-50 hover:bg-blue-100 text-blue-900 rounded-2xl font-bold text-xs flex items-center space-x-3 transition">
+                        <div class="w-8 h-8 bg-blue-600 text-white rounded-xl flex items-center justify-center"><i class="fa-solid fa-vault"></i></div>
+                        <span>Épargner de l'argent (Créer un coffre)</span>
+                    </button>
+                    <button onclick="closeActionMenu(); openModalTransaction('deposit')" class="w-full p-3 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-2xl font-bold text-xs flex items-center space-x-3 transition">
+                        <div class="w-8 h-8 bg-slate-900 text-white rounded-xl flex items-center justify-center"><i class="fa-solid fa-arrow-down-left"></i></div>
+                        <span>Faire un Dépôt</span>
+                    </button>
+                    <button onclick="closeActionMenu(); openModalTransaction('withdraw')" class="w-full p-3 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-2xl font-bold text-xs flex items-center space-x-3 transition">
+                        <div class="w-8 h-8 bg-red-100 text-red-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-arrow-up-right"></i></div>
+                        <span>Retirer de l'argent</span>
+                    </button>
+                    <button onclick="closeActionMenu(); switchView('crypto')" class="w-full p-3 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-2xl font-bold text-xs flex items-center space-x-3 transition">
+                        <div class="w-8 h-8 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center"><i class="fa-brands fa-bitcoin"></i></div>
+                        <span>Passerelle Crypto & Change</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- Contenu dynamique -->
-            <div class="flex-1 px-4 overflow-y-auto pb-20">
-                <h3 class="text-xs font-bold uppercase text-slate-400 mb-3">Passerelle Crypto & Épargne</h3>
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                    <p class="text-xs text-slate-600">Fonctionnalités prêtes pour vos transactions sécurisées.</p>
+            <!-- ================= TIROIR DE NOTIFICATIONS ================= -->
+            <div id="notifications-drawer" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden z-40 flex justify-end" onclick="toggleNotifications()">
+                <div class="bg-white w-80 h-full p-5 shadow-2xl space-y-4 overflow-y-auto" onclick="event.stopPropagation()">
+                    <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                        <h3 class="font-extrabold text-sm text-slate-900 flex items-center space-x-2">
+                            <i class="fa-solid fa-bell text-blue-600"></i>
+                            <span>Notifications</span>
+                        </h3>
+                        <button onclick="toggleNotifications()" class="text-slate-400 hover:text-slate-700 text-xs"><i class="fa-solid fa-xmark text-base"></i></button>
+                    </div>
+                    <div id="notifications-list" class="space-y-2.5"></div>
                 </div>
+            </div>
+
+        </div>
+
+        <!-- ================= MODAL COFFRE ================= -->
+        <div id="modal-vault" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+            <div class="bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl space-y-4">
+                <h3 class="font-extrabold text-sm text-slate-900 flex items-center space-x-2">
+                    <i class="fa-solid fa-vault text-blue-600"></i>
+                    <span>Nouveau Coffre d'Épargne</span>
+                </h3>
+                <p class="text-[11px] text-slate-400 leading-relaxed">Les fonds sont bloqués et libérés automatiquement à la veille (J-1).</p>
+                
+                <form onsubmit="handleCreateVault(event)" class="space-y-3">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Titre / Objectif</label>
+                        <input type="text" id="vault-title" required placeholder="Ex: Loyer de fin du mois" class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none focus:border-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Montant (XOF)</label>
+                        <input type="number" id="vault-amount" required placeholder="50000" class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none focus:border-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Date cible (Jour J)</label>
+                        <input type="date" id="vault-date" required class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none focus:border-blue-600">
+                    </div>
+                    <div class="flex gap-2 pt-2">
+                        <button type="button" onclick="closeModalVault()" class="flex-1 py-2.5 text-xs font-bold text-slate-500 bg-slate-100 rounded-xl">Annuler</button>
+                        <button type="submit" class="flex-1 py-2.5 text-xs font-bold text-white bg-blue-600 rounded-xl shadow-md">Créer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= MODAL TRANSACTION ================= -->
+        <div id="modal-transaction" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+            <div class="bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl space-y-4">
+                <h3 id="tx-modal-title" class="font-extrabold text-sm text-slate-900">Opération</h3>
+                
+                <form onsubmit="handleTransactionSubmit(event)" class="space-y-3">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Moyen de paiement</label>
+                        <select id="tx-method" class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none font-medium">
+                            <option value="Wave">Wave Mobile Money</option>
+                            <option value="Orange Money">Orange Money</option>
+                            <option value="MTN MoMo">MTN Mobile Money</option>
+                            <option value="Moov Money">Moov Money</option>
+                            <option value="Carte VISA">Carte VISA / Mastercard</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Montant (XOF)</label>
+                        <input type="number" id="tx-amount" required placeholder="10000" class="w-full px-3 py-2.5 text-xs border rounded-xl border-slate-200 focus:outline-none font-medium">
+                    </div>
+                    <div class="flex gap-2 pt-2">
+                        <button type="button" onclick="closeModalTransaction()" class="flex-1 py-2.5 text-xs font-bold text-slate-500 bg-slate-100 rounded-xl">Annuler</button>
+                        <button type="submit" class="flex-1 py-2.5 text-xs font-bold text-white bg-blue-600 rounded-xl shadow-md">Confirmer</button>
+                    </div>
+                </form>
             </div>
         </div>
 
     </div>
 
+    <!-- SCRIPT INTERACTIF -->
     <script>
-        function switchAuthTab(tab) {
-            const loginForm = document.getElementById('form-login');
-            const regForm = document.getElementById('form-register');
-            const tabLogin = document.getElementById('tab-login');
-            const tabReg = document.getElementById('tab-register');
+        let activeUser = JSON.parse(localStorage.getItem('eco_user')) || null;
+        let currentTxType = 'deposit';
+        let chartInstance = null;
 
-            if(tab === 'login') {
-                loginForm.classList.remove('hidden');
-                regForm.classList.add('hidden');
-                tabLogin.className = "flex-1 py-2.5 text-xs font-bold rounded-xl bg-white shadow-sm text-blue-600 transition-all";
-                tabReg.className = "flex-1 py-2.5 text-xs font-bold rounded-xl text-slate-400 transition-all";
-            } else {
-                loginForm.classList.add('hidden');
-                regForm.classList.remove('hidden');
-                tabReg.className = "flex-1 py-2.5 text-xs font-bold rounded-xl bg-white shadow-sm text-blue-600 transition-all";
-                tabLogin.className = "flex-1 py-2.5 text-xs font-bold rounded-xl text-slate-400 transition-all";
-            }
+        const platformWallets = {
+            USDT: "TX9qK2mP8vL3wY5zB7nH1xQ4 (TRC20)",
+            BTC: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+            ETH: "0x71C3B92...f8a (ERC20)"
+        };
+
+        let vaults = JSON.parse(localStorage.getItem('eco_vaults')) || [
+            { id: 1, title: 'Mariage', amount: 200000, targetDate: '2026-12-15', unlockDate: '2026-12-14' }
+        ];
+
+        let transactions = JSON.parse(localStorage.getItem('eco_transactions')) || [
+            { id: 1, type: 'Dépôt', desc: 'Wave Mobile Money', amount: 50000, date: '05/08/2026', status: 'Succès' }
+        ];
+
+        let notifications = JSON.parse(localStorage.getItem('eco_notifications')) || [
+            { id: 1, text: 'Bienvenue sur EcoEpargne ! Votre compte est sécurisé.', date: 'Aujourd\'hui' }
+        ];
+
+        window.onload = function() {
+            if (activeUser) { showDashboard(); }
+        };
+
+        function switchAuthTab(tab) {
+            const isLogin = tab === 'login';
+            document.getElementById('form-login').classList.toggle('hidden', !isLogin);
+            document.getElementById('form-register').classList.toggle('hidden', isLogin);
+            
+            document.getElementById('tab-login').className = isLogin 
+                ? 'flex-1 py-2.5 text-xs font-bold rounded-xl bg-white shadow-sm transition text-slate-800' 
+                : 'flex-1 py-2.5 text-xs font-bold text-slate-400 transition';
+            
+            document.getElementById('tab-register').className = !isLogin 
+                ? 'flex-1 py-2.5 text-xs font-bold rounded-xl bg-white shadow-sm transition text-slate-800' 
+                : 'flex-1 py-2.5 text-xs font-bold text-slate-400 transition';
         }
 
-        async function handleRegister(e) {
+        function handleRegister(e) {
             e.preventDefault();
-            const nom = document.getElementById('reg-name').value;
-            const téléphone = document.getElementById('reg-phone').value;
-            const codePIN = document.getElementById('reg-pin').value;
-
-            try {
-                const response = await fetch('/api/auth/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nom, téléphone, codePIN })
-                });
-                const data = await response.json();
-                if(response.ok) {
-                    alert('Inscription réussie ! Connectez-vous.');
-                    switchAuthTab('login');
-                } else {
-                    alert(data.erreur || 'Erreur lors de l’inscription');
-                }
-            } catch(err) {
-                alert('Erreur de connexion au serveur.');
-            }
+            activeUser = {
+                firstName: document.getElementById('reg-firstname').value,
+                lastName: document.getElementById('reg-lastname').value,
+                phone: document.getElementById('reg-phone').value,
+                email: document.getElementById('reg-email').value,
+                agency: document.getElementById('reg-agency').value,
+                availableBalance: 50000,
+                photo: 'https://via.placeholder.com/150/2563eb/ffffff?text=User'
+            };
+            localStorage.setItem('eco_user', JSON.stringify(activeUser));
+            addNotification("Compte créé avec succès.");
+            showDashboard();
         }
 
         function handleLogin(e) {
             e.preventDefault();
-            // Simulation connexion directe au dashboard pour test visuel
+            const phone = document.getElementById('login-phone').value;
+            activeUser = {
+                firstName: "Jean",
+                lastName: "Paul",
+                phone: phone,
+                email: "jean.paul@gmail.com",
+                agency: "Abidjan Plateau",
+                availableBalance: 125000,
+                photo: 'https://via.placeholder.com/150/2563eb/ffffff?text=JP'
+            };
+            localStorage.setItem('eco_user', JSON.stringify(activeUser));
+            showDashboard();
+        }
+
+        function showDashboard() {
             document.getElementById('screen-auth').classList.add('hidden');
             document.getElementById('screen-dashboard').classList.remove('hidden');
+
+            document.getElementById('dash-name').innerText = `${activeUser.firstName} ${activeUser.lastName}`;
+            document.getElementById('dash-available').innerText = activeUser.availableBalance.toLocaleString() + ' XOF';
+            document.getElementById('dash-avatar').src = activeUser.photo;
+            document.getElementById('settings-avatar').src = activeUser.photo;
+
+            document.getElementById('sett-fullname').innerText = `${activeUser.firstName} ${activeUser.lastName}`;
+            document.getElementById('sett-agency').innerText = `Agence : ${activeUser.agency}`;
+            document.getElementById('sett-phone').innerText = activeUser.phone;
+            document.getElementById('sett-email').innerText = activeUser.email;
+
+            renderVaults();
+            renderTransactions();
+            renderNotifications();
+            renderChart();
+        }
+
+        function switchView(viewName) {
+            ['home', 'savings', 'history', 'crypto', 'settings'].forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if(el) el.classList.add('hidden');
+            });
+            
+            ['home', 'savings', 'crypto', 'settings'].forEach(nav => {
+                const navBtn = document.getElementById(`nav-${nav}`);
+                if(navBtn) navBtn.className = "flex flex-col items-center space-y-1 hover:text-blue-600 transition flex-1 text-slate-400";
+            });
+
+            const targetView = document.getElementById(`view-${viewName}`);
+            if(targetView) targetView.classList.remove('hidden');
+
+            if(['home', 'savings', 'crypto', 'settings'].includes(viewName)) {
+                const activeNav = document.getElementById(`nav-${viewName}`);
+                if(activeNav) activeNav.className = "text-blue-600 flex flex-col items-center space-y-1 transition flex-1 font-black";
+            }
+        }
+
+        function toggleActionMenu() {
+            const menu = document.getElementById('action-menu');
+            const icon = document.getElementById('fab-icon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('rotate-45');
+        }
+
+        function closeActionMenu() {
+            document.getElementById('action-menu').classList.add('hidden');
+            document.getElementById('fab-icon').classList.remove('rotate-45');
+        }
+
+        function toggleNotifications() {
+            document.getElementById('notifications-drawer').classList.toggle('hidden');
+        }
+
+        function addNotification(text) {
+            notifications.unshift({ id: Date.now(), text, date: 'À l\'instant' });
+            localStorage.setItem('eco_notifications', JSON.stringify(notifications));
+            renderNotifications();
+        }
+
+        function renderNotifications() {
+            const list = document.getElementById('notifications-list');
+            list.innerHTML = '';
+            notifications.forEach(n => {
+                list.innerHTML += `
+                    <div class="p-3 bg-slate-50 rounded-2xl border border-slate-100 text-xs space-y-1">
+                        <p class="font-bold text-slate-800">${n.text}</p>
+                        <span class="text-[10px] text-slate-400">${n.date}</span>
+                    </div>`;
+            });
+        }
+
+        function triggerPhotoUpload() {
+            document.getElementById('photo-input').click();
+        }
+
+        function uploadAvatar(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    activeUser.photo = e.target.result;
+                    localStorage.setItem('eco_user', JSON.stringify(activeUser));
+                    document.getElementById('dash-avatar').src = e.target.result;
+                    document.getElementById('settings-avatar').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function renderVaults() {
+            const fullContainer = document.getElementById('vaults-full-list');
+            let totalSaved = 0;
+            fullContainer.innerHTML = '';
+            const today = new Date();
+
+            vaults.forEach(v => {
+                totalSaved += Number(v.amount);
+                const unlockDate = new Date(v.unlockDate);
+                const diffDays = Math.max(0, Math.ceil((unlockDate - today) / (1000 * 60 * 60 * 24)));
+
+                fullContainer.innerHTML += `
+                    <div class="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-extrabold text-slate-800 text-xs">${v.title}</h4>
+                                <p class="text-[10px] text-slate-400 mt-0.5">Déblocage J-1 : <span class="font-bold text-blue-600">${v.unlockDate}</span></p>
+                            </div>
+                            <span class="text-[10px] bg-amber-50 text-amber-700 border border-amber-200 font-bold px-2.5 py-1 rounded-xl flex items-center space-x-1">
+                                <i class="fa-solid fa-clock"></i>
+                                <span>${diffDays}j restants</span>
+                            </span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs pt-2 border-t border-slate-50 font-medium">
+                            <span class="text-slate-400">Montant bloqué</span>
+                            <span class="font-black text-slate-900">${Number(v.amount).toLocaleString()} XOF</span>
+                        </div>
+                    </div>`;
+            });
+
+            document.getElementById('dash-saved').innerText = totalSaved.toLocaleString() + ' XOF';
+            if (chartInstance) renderChart();
+        }
+
+        function renderTransactions() {
+            const homeRecent = document.getElementById('home-recent-activity');
+            const fullList = document.getElementById('full-transactions-list');
+            document.getElementById('tx-count').innerText = `${transactions.length} opération(s)`;
+            
+            fullList.innerHTML = '';
+            homeRecent.innerHTML = '';
+
+            transactions.forEach((tx, index) => {
+                const isPos = tx.type === 'Dépôt' || tx.type === 'Dépôt Crypto';
+                const itemHTML = `
+                    <div class="bg-white p-3 rounded-2xl border border-slate-200/80 flex justify-between items-center text-xs shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-9 h-9 rounded-xl flex items-center justify-center font-bold ${isPos ? 'bg-blue-50 text-blue-600' : 'bg-red-50 text-red-600'}">
+                                <i class="fa-solid ${isPos ? 'fa-arrow-down-left' : 'fa-arrow-up-right'}"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">${tx.type} - ${tx.desc}</h4>
+                                <span class="text-[10px] text-slate-400">${tx.date}</span>
+                            </div>
+                        </div>
+                        <span class="font-black ${isPos ? 'text-blue-600' : 'text-slate-800'}">${isPos ? '+' : '-'}${Number(tx.amount).toLocaleString()} XOF</span>
+                    </div>`;
+                
+                fullList.innerHTML += itemHTML;
+                if(index < 2) homeRecent.innerHTML += itemHTML;
+            });
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('financeChart').getContext('2d');
+            if (chartInstance) chartInstance.destroy();
+
+            let totalSaved = vaults.reduce((sum, v) => sum + Number(v.amount), 0);
+
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Disponible', 'Épargné (Coffres)'],
+                    datasets: [{
+                        data: [activeUser.availableBalance, totalSaved],
+                        backgroundColor: ['#2563eb', '#0f172a'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10, weight: 'bold' } } }
+                    }
+                }
+            });
+        }
+
+        function switchCryptoTab(tab) {
+            const isDep = tab === 'deposit';
+            document.getElementById('crypto-sub-deposit').classList.toggle('hidden', !isDep);
+            document.getElementById('crypto-sub-withdraw').classList.toggle('hidden', isDep);
+
+            document.getElementById('ctab-deposit').className = isDep 
+                ? 'flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-slate-800 transition' 
+                : 'flex-1 py-2 text-xs font-bold text-slate-500 transition';
+
+            document.getElementById('ctab-withdraw').className = !isDep 
+                ? 'flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-slate-800 transition' 
+                : 'flex-1 py-2 text-xs font-bold text-slate-500 transition';
+        }
+
+        function updateDepositAddress() {
+            const net = document.getElementById('deposit-crypto-net').value;
+            document.getElementById('display-wallet-address').innerText = platformWallets[net];
+        }
+
+        function copyWalletAddress() {
+            const addr = document.getElementById('display-wallet-address').innerText;
+            navigator.clipboard.writeText(addr);
+            alert("Adresse copiée dans le presse-papier !");
+        }
+
+        function handleCryptoDepositSubmit(e) {
+            e.preventDefault();
+            const crypto = document.getElementById('deposit-crypto-net').value;
+            const amount = parseFloat(document.getElementById('deposit-crypto-amount').value) || 0;
+            const txHash = document.getElementById('deposit-tx-hash').value;
+
+            let rates = { USDT: 615, BTC: 38000000, ETH: 2100000 };
+            let xofValue = amount * rates[crypto];
+
+            activeUser.availableBalance += xofValue;
+            transactions.unshift({ 
+                id: Date.now(), 
+                type: 'Dépôt Crypto', 
+                desc: `${amount} ${crypto} (Hash: ${txHash.substring(0,6)}...)`, 
+                amount: xofValue, 
+                date: 'Aujourd\'hui', 
+                status: 'Succès' 
+            });
+
+            localStorage.setItem('eco_user', JSON.stringify(activeUser));
+            localStorage.setItem('eco_transactions', JSON.stringify(transactions));
+            addNotification(`Dépôt de ${amount} ${crypto} validé (+${xofValue.toLocaleString()} XOF)`);
+
+            alert(`Succès ! ${xofValue.toLocaleString()} XOF ont été crédités sur votre solde après validation de la transaction.`);
+            showDashboard();
+            switchView('home');
+        }
+
+        function handleCryptoWithdrawSubmit(e) {
+            e.preventDefault();
+            const crypto = document.getElementById('withdraw-crypto-type').value;
+            const xofAmount = parseFloat(document.getElementById('withdraw-xof-amount').value) || 0;
+            const address = document.getElementById('withdraw-user-address').value;
+
+            if (xofAmount > activeUser.availableBalance) {
+                alert("Solde XOF insuffisant pour effectuer ce retrait.");
+                return;
+            }
+
+            let rates = { USDT: 615, BTC: 38000000 };
+            let cryptoReceived = (xofAmount / rates[crypto]).toFixed(4);
+
+            activeUser.availableBalance -= xofAmount;
+            transactions.unshift({ 
+                id: Date.now(), 
+                type: 'Retrait Crypto', 
+                desc: `${cryptoReceived} ${crypto} vers ${address.substring(0,6)}...`, 
+                amount: xofAmount, 
+                date: 'Aujourd\'hui', 
+                status: 'En cours' 
+            });
+
+            localStorage.setItem('eco_user', JSON.stringify(activeUser));
+            localStorage.setItem('eco_transactions', JSON.stringify(transactions));
+            addNotification(`Retrait de ${cryptoReceived} ${crypto} initié.`);
+
+            alert(`Retrait validé ! ${cryptoReceived} ${crypto} sont en cours d'envoi vers votre adresse.`);
+            showDashboard();
+            switchView('home');
+        }
+
+        function openModalTransaction(type) {
+            currentTxType = type;
+            document.getElementById('tx-modal-title').innerText = type === 'deposit' ? 'Faire un Dépôt' : 'Faire un Retrait';
+            document.getElementById('modal-transaction').classList.remove('hidden');
+        }
+
+        function closeModalTransaction() {
+            document.getElementById('modal-transaction').classList.add('hidden');
+        }
+
+        function handleTransactionSubmit(e) {
+            e.preventDefault();
+            const amount = parseFloat(document.getElementById('tx-amount').value);
+            const method = document.getElementById('tx-method').value;
+
+            if (currentTxType === 'deposit') {
+                activeUser.availableBalance += amount;
+                transactions.unshift({ id: Date.now(), type: 'Dépôt', desc: method, amount: amount, date: 'Aujourd\'hui', status: 'Succès' });
+                addNotification(`Dépôt de ${amount.toLocaleString()} XOF via ${method} validé.`);
+            } else {
+                if (amount > activeUser.availableBalance) {
+                    alert("Solde disponible insuffisant.");
+                    return;
+                }
+                activeUser.availableBalance -= amount;
+                transactions.unshift({ id: Date.now(), type: 'Retrait', desc: method, amount: amount, date: 'Aujourd\'hui', status: 'Succès' });
+                addNotification(`Retrait de ${amount.toLocaleString()} XOF vers ${method} validé.`);
+            }
+
+            localStorage.setItem('eco_user', JSON.stringify(activeUser));
+            localStorage.setItem('eco_transactions', JSON.stringify(transactions));
+            closeModalTransaction();
+            showDashboard();
+        }
+
+        function openModalVault() {
+            document.getElementById('modal-vault').classList.remove('hidden');
+        }
+
+        function closeModalVault() {
+            document.getElementById('modal-vault').classList.add('hidden');
+        }
+
+        function handleCreateVault(e) {
+            e.preventDefault();
+            const title = document.getElementById('vault-title').value;
+            const amount = document.getElementById('vault-amount').value;
+            const targetDateStr = document.getElementById('vault-date').value;
+
+            const targetDate = new Date(targetDateStr);
+            targetDate.setDate(targetDate.getDate() - 1);
+            const unlockDateStr = targetDate.toISOString().split('T')[0];
+
+            vaults.push({
+                id: Date.now(),
+                title,
+                amount,
+                targetDate: targetDateStr,
+                unlockDate: unlockDateStr
+            });
+
+            transactions.unshift({ id: Date.now(), type: 'Épargne', desc: `Coffre: ${title}`, amount: Number(amount), date: 'Aujourd\'hui', status: 'Bloqué' });
+
+            localStorage.setItem('eco_vaults', JSON.stringify(vaults));
+            localStorage.setItem('eco_transactions', JSON.stringify(transactions));
+            addNotification(`Coffre "${title}" créé avec succès.`);
+            
+            closeModalVault();
+            renderVaults();
+            renderTransactions();
         }
 
         function logout() {
+            localStorage.removeItem('eco_user');
+            activeUser = null;
             document.getElementById('screen-dashboard').classList.add('hidden');
             document.getElementById('screen-auth').classList.remove('hidden');
         }
